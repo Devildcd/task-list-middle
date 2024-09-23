@@ -1,0 +1,179 @@
+/* Task invitation Css */
+.add-task-container {
+  display: flex; /* Para alinear el ícono y el texto en una línea */
+  align-items: center; /* Centrar verticalmente el contenido */
+  padding: 10px; /* Espacio interno del contenedor */
+  border-radius: 5px; /* Esquinas redondeadas */
+  cursor: pointer; /* Cambiar el cursor al pasar sobre el contenedor */
+}
+
+.add-task-text {
+  font-size: 16px; /* Tamaño del texto */
+  margin-left: 10px;
+}
+
+/* Input Css */
+.my-input {
+  border: none; /* Establece el borde */
+  top: -10px; /* Sube el input */
+  font-size: 16px; /* Tamano del texto */
+}
+
+.my-input:focus {
+  border: none;
+  box-shadow: none;
+}
+
+.input-container {
+  display: flex; /* Alinea el input y el círculo en una fila */
+  align-items: center; /* Alinea verticalmente los elementos */
+  gap: 10px; /* Espacio entre el input y el círculo */
+}
+
+/* Icons Css */
+.add-icon {
+  stroke: rgb(0, 127, 255);
+  width: 26px;
+  height: 26px;
+}
+
+/* Profile Circle Css */
+
+.circle {
+  width: 24px; /* Ancho del círculo */
+  height: 24px; /* Alto del círculo */
+  border-radius: 50%; /* Hace que el div sea redondo */
+  overflow: hidden; /* Oculta la parte de la imagen que sobrepasa el contenedor */
+  display: flex; /* Flex para centrar la imagen */
+  justify-content: center; /* Centra la imagen horizontalmente */
+  align-items: center; /* Centra la imagen verticalmente */
+  margin-top: -13px;
+}
+
+.circle img {
+  width: 100%; /* La imagen ocupa todo el ancho del círculo */
+  height: 100%; /* La imagen ocupa todo el alto del círculo */
+  object-fit: cover; /* La imagen se escala para cubrir el círculo sin distorsión */
+}
+
+/* Buttons Css */
+
+.button-container {
+  display: flex; /* Organiza los botones en una fila */
+  align-items: center; /* Alinea verticalmente al centro */
+}
+
+.grouped-buttons {
+  display: flex;
+  gap: 10px; /* Espacio entre botones del grupo */
+}
+
+.right-grouped-buttons {
+  display: flex;
+  gap: 10px; /* Espacio entre botones del grupo derecho */
+  margin-left: auto; /* Empuja este grupo hacia la derecha */
+}
+
+.grouped-buttons button {
+  border: 1px solid #c5c7cc !important; /* Borde de color*/
+  background-color: #fff !important;
+  color: #8a94a6;
+  height: 40px;
+}
+
+.grouped-buttons svg {
+  margin-right: 5px;
+}
+
+.btn-secundary {
+  background-color: #eaf0f5;
+  width: 110px;
+  height: 40px;
+  color: #04142f;
+  margin: 0px 40px 0px 0px; 
+}
+
+.btn-secundary svg {
+  margin-right: 5px;
+}
+
+.btn-danger {
+  background-color: #eaf0f5;
+  border-color: #eaf0f5;
+  width: 110px;
+  height: 40px;
+  color: #04142f;
+}
+
+.btn-success {
+  height: 40px;
+  background-color: #2e59d9;
+  border-color: #2e59d9;
+  width: 50px;
+  color: #fff !important;
+}
+
+/* Task List Css */
+.checklist-container {
+  border: none;
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 10px; /* Espacio interior del contenedor */
+  max-width: 100%; /* Ancho máximo del contenedor */
+  background-color: transparent; /* Color de fondo */
+}
+
+.checklist {
+  list-style-type: none; /* Elimina los puntos de la lista */
+  padding: 0; /* Elimina el padding */
+  margin: 0; /* Elimina el margen */
+}
+
+.checklist li {
+  margin: 10px 0; /* Espacio entre los elementos de la lista */
+}
+
+.custom-checkbox {
+  width: 20px; /* Ancho del cuadrado */
+  height: 20px; /* Alto del cuadrado */
+  display: inline-block; /* Hace que el cuadrado esté alineado con el texto */
+  margin-right: 10px; /* Espacio entre el cuadrado y el texto */
+  cursor: pointer; /* Cambia el cursor al pasar el mouse */
+}
+
+label {
+  display: flex; /* Establece el uso de flexbox para alinear elementos */
+  align-items: center; /* Centra verticalmente los elementos dentro del label */
+}
+
+
+/* Css resolution < 1230px */
+@media (max-width: 1230px) { 
+  .button-icon {
+      display: flex; 
+      justify-content: center; /* Centrar íconos */
+      padding: 8px; 
+  }
+
+  .button-icon span {
+      display: none; /* Ocultar el texto */
+  }
+
+  .btn-secundary {
+    margin: 0px 10px 0px 0px; 
+    padding: 8px;
+    width: 46px;
+  }
+
+  .grouped-buttons button span {
+    display: none;
+  }
+
+  .grouped-buttons button {
+    display: flex;
+    justify-content: center; 
+    padding: 8px;
+  }
+
+}
+
+
