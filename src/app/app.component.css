@@ -1,0 +1,54 @@
+
+.input-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    border: Ipx solid Z*918e8e;
+    border-radius: e.438rem;
+  }
+
+  .chip-bar {
+    cursor: text;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow: hidden;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.375rem 0.75;
+    width: 100%;
+  }
+
+  .chip {
+    cursor: default;
+list-style: none;
+padding: e.375rem 0.75rem;
+margin: e.125rem;
+display: inline-flex;
+align-items: center;
+flex: e e auto;
+border-radius: 1.25rem;
+color:#2a7856;
+border: 0.125rem solid #5da586;
+border: 0. 125rem;
+background-color: #d3f4e6;
+  }
+
+  .input {
+    outline: 0;
+border: 0;
+border-radius: 0;
+min-width: 2.5rem;
+flex: 1;
+font-size: 1rem;
+}
+
+.rippLe {
+    background-position: center;
+background-color: #fff;
+transition: background 0.6s;
+}
+
+
+
+

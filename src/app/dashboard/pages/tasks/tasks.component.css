@@ -1,4 +1,36 @@
-/* Task invitation Css */
+/* containers Css */
+.first-container {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  border: 1px solid #ccc; 
+  border-bottom: none;
+  border-radius: 8px; 
+  border-bottom-left-radius: 0; 
+  border-bottom-right-radius: 0; 
+  padding: 10px;
+  position: relative; 
+  box-shadow: 
+    0 -2px 5px rgba(0, 0, 0, 0.1), /* Sombra en la parte superior */
+    -2px 0 5px rgba(0, 0, 0, 0.1), /* Sombra en el lado izquierdo */
+    2px 0 5px rgba(0, 0, 0, 0.1);  /* Sombra en el lado derecho */
+}
+
+.second-container {
+  height: 55px; 
+  border: 1px solid #ccc; 
+  border-top: none;
+  border-radius: 0 0 8px 8px; 
+  margin-top: -1px; 
+  background-color: #fafbfb;
+  box-shadow: 
+    0 2px 5px rgba(0, 0, 0, 0.1), /* Sombra en la parte inferior */
+    -2px 0 5px rgba(0, 0, 0, 0.1), /* Sombra en el lado izquierdo */
+    2px 0 5px rgba(0, 0, 0, 0.1);  /* Sombra en el lado derecho */
+    margin-top: 1px;
+}
+
+/* create task Css */
 .add-task-container {
   display: flex; /* Para alinear el ícono y el texto en una línea */
   align-items: center; /* Centrar verticalmente el contenido */
@@ -12,52 +44,7 @@
   margin-left: 10px;
 }
 
-/* Input Css */
-.my-input {
-  border: none; /* Establece el borde */
-  top: -10px; /* Sube el input */
-  font-size: 16px; /* Tamano del texto */
-}
-
-.my-input:focus {
-  border: none;
-  box-shadow: none;
-}
-
-.input-container {
-  display: flex; /* Alinea el input y el círculo en una fila */
-  align-items: center; /* Alinea verticalmente los elementos */
-  gap: 10px; /* Espacio entre el input y el círculo */
-}
-
-/* Icons Css */
-.add-icon {
-  stroke: rgb(0, 127, 255);
-  width: 26px;
-  height: 26px;
-}
-
-/* Profile Circle Css */
-
-.circle {
-  width: 24px; /* Ancho del círculo */
-  height: 24px; /* Alto del círculo */
-  border-radius: 50%; /* Hace que el div sea redondo */
-  overflow: hidden; /* Oculta la parte de la imagen que sobrepasa el contenedor */
-  display: flex; /* Flex para centrar la imagen */
-  justify-content: center; /* Centra la imagen horizontalmente */
-  align-items: center; /* Centra la imagen verticalmente */
-  margin-top: -13px;
-}
-
-.circle img {
-  width: 100%; /* La imagen ocupa todo el ancho del círculo */
-  height: 100%; /* La imagen ocupa todo el alto del círculo */
-  object-fit: cover; /* La imagen se escala para cubrir el círculo sin distorsión */
-}
-
-/* Buttons Css */
-
+/* buttons Css */
 .button-container {
   display: flex; /* Organiza los botones en una fila */
   align-items: center; /* Alinea verticalmente al centro */
@@ -66,6 +53,11 @@
 .grouped-buttons {
   display: flex;
   gap: 10px; /* Espacio entre botones del grupo */
+}
+
+.grouped-icons {
+  display: flex;
+  gap: 20px;
 }
 
 .right-grouped-buttons {
@@ -79,83 +71,189 @@
   background-color: #fff !important;
   color: #8a94a6;
   height: 40px;
+  outline: none; /* Elimina el contorno por defecto */
+}
+
+.grouped-buttons button:active {
+  border: 1px solid #c5c7cc !important; /* Borde de color*/
+  background-color: #fff !important;
+  color: #8a94a6;
+  height: 40px;
+  outline: none; /* Elimina el contorno por defecto */
+}
+
+.grouped-buttons button:focus {
+  border: 1px solid #c5c7cc !important; /* Borde de color*/
+  background-color: #fff !important;
+  color: #8a94a6;
+  height: 40px;
+  outline: none; /* Elimina el contorno por defecto */
+  box-shadow: none !important; /* Elimina cualquier sombra */
 }
 
 .grouped-buttons svg {
   margin-right: 5px;
 }
 
-.btn-secundary {
+.open-button {
   background-color: #eaf0f5;
-  width: 110px;
-  height: 40px;
-  color: #04142f;
-  margin: 0px 40px 0px 0px; 
+    border-color: #eaf0f5;
+    width: 110px;
+    height: 40px;
+    color: #04142f;
+    border: none; /* Elimina el borde si no deseas que aparezca */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    outline: none; /* Elimina el contorno por defecto */
+    margin-right: 40px;
 }
 
-.btn-secundary svg {
+.open-button:hover {
+  background-color: rgb(208, 210, 211);
+}
+
+.open-button:focus {
+  outline: none; /* Elimina el contorno de foco */
+  background-color: #eaf0f5 !important; /* Mantiene el color de fondo al hacer clic */
+  border-color: #eaf0f5 !important; /* Mantiene el color del borde al hacer clic */
+  color: #04142f !important; /* Mantiene el color del texto al hacer clic */
+  box-shadow: none !important; /* Elimina cualquier sombra */
+}
+
+.open-button:active {
+  background-color: #eaf0f5; /* Mantiene el color de fondo al hacer clic */
+  border-color: #eaf0f5; /* Mantiene el color del borde al hacer clic */
+  color: #04142f; /* Mantiene el color del texto al hacer clic */
+}
+
+.open-button svg {
   margin-right: 5px;
 }
 
-.btn-danger {
-  background-color: #eaf0f5;
-  border-color: #eaf0f5;
-  width: 110px;
-  height: 40px;
-  color: #04142f;
+.cancel-button {
+    background-color: #eaf0f5;
+    border-color: #eaf0f5;
+    width: 110px;
+    height: 40px;
+    color: #04142f;
+    border: none; /* Elimina el borde si no deseas que aparezca */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    outline: none; /* Elimina el contorno por defecto */
 }
 
-.btn-success {
+.cancel-button:hover {
+  background-color: rgb(208, 210, 211);
+}
+
+.cancel-button:focus {
+  outline: none; 
+  background-color: #eaf0f5 !important; 
+  border-color: #eaf0f5 !important; 
+  color: #04142f !important; 
+  box-shadow: none !important; 
+}
+
+
+.cancel-button:active {
+  background-color: #eaf0f5; 
+  border-color: #eaf0f5; 
+  color: #04142f; 
+}
+
+.confirm-button {
   height: 40px;
   background-color: #2e59d9;
   border-color: #2e59d9;
   width: 50px;
   color: #fff !important;
+  border: none; 
+  cursor: pointer; 
+  outline: none; 
 }
 
-/* Task List Css */
-.checklist-container {
-  border: none;
-  border-radius: 8px; /* Bordes redondeados */
-  padding: 10px; /* Espacio interior del contenedor */
-  max-width: 100%; /* Ancho máximo del contenedor */
-  background-color: transparent; /* Color de fondo */
+.confirm-button:active {
+  background-color: #2e59d9;
+  border-color: #2e59d9;
+  color: #fff !important;
+  outline: none; 
+  box-shadow: none !important; 
 }
 
-.checklist {
-  list-style-type: none; /* Elimina los puntos de la lista */
-  padding: 0; /* Elimina el padding */
-  margin: 0; /* Elimina el margen */
+.confirm-button:focus {
+  height: 40px;
+  background-color: #2e59d9;
+  border-color: #2e59d9;
+  width: 50px;
+  color: #fff !important;
+  border: none; 
+  cursor: pointer; 
+  outline: none; 
 }
 
-.checklist li {
-  margin: 10px 0; /* Espacio entre los elementos de la lista */
+
+.add-icon {
+  stroke: rgb(0, 127, 255);
+  width: 24px;
+  height: 24px;
 }
 
-.custom-checkbox {
-  width: 20px; /* Ancho del cuadrado */
-  height: 20px; /* Alto del cuadrado */
-  display: inline-block; /* Hace que el cuadrado esté alineado con el texto */
-  margin-right: 10px; /* Espacio entre el cuadrado y el texto */
-  cursor: pointer; /* Cambia el cursor al pasar el mouse */
+.form-icon {
+  stroke: rgb(0, 127, 255);
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 10px;
 }
 
-label {
-  display: flex; /* Establece el uso de flexbox para alinear elementos */
-  align-items: center; /* Centra verticalmente los elementos dentro del label */
+/* Profile Circle Css */
+
+.circle {
+  width: 24px; 
+  height: 24px; 
+  border-radius: 50%; 
+  overflow: hidden; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  margin-left: 16px; 
+  position: absolute;
+  right: 0; 
+  top: 10px; 
+  margin-right: 10px;
 }
 
+.circle img {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+}
+
+.right-grouped-buttons {
+  display: flex;
+  gap: 10px; 
+  margin-left: auto; 
+}
+
+.grouped-buttons button {
+  border: 1px solid #c5c7cc; 
+  background-color: #fff !important;
+  color: #8a94a6;
+  height: 40px;
+}
+
+.grouped-buttons svg {
+  margin-right: 5px;
+}
 
 /* Css resolution < 1230px */
 @media (max-width: 1230px) { 
   .button-icon {
       display: flex; 
-      justify-content: center; /* Centrar íconos */
+      justify-content: center; 
       padding: 8px; 
   }
 
   .button-icon span {
-      display: none; /* Ocultar el texto */
+      display: none; 
   }
 
   .btn-secundary {
@@ -171,9 +269,470 @@ label {
   .grouped-buttons button {
     display: flex;
     justify-content: center; 
-    padding: 8px;
+    padding: 6.5px;
+    width: 42px;
+    border: transparent !important; 
   }
 
+  .grouped-buttons {
+    gap: 0;
+  }
+
+  .open-button {
+    margin-right: 10px;
+    width: 42px;
+  }
+
+  .confirm-button {
+    width: 42px;
+  }
 }
 
 
+
+/* Form Css */
+.input-container {
+  display: flex;
+  align-items: center; 
+  justify-content: space-between;
+  flex-grow: 1; 
+  position: relative;
+}
+
+.chip-bar {
+  cursor: text;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  overflow: hidden;
+  font-size: 16px;
+  font-weight: 500;
+  width: 100%;
+  list-style: none; 
+}
+
+.chip {
+  cursor: default;
+  list-style: none;
+  margin-left: 2px;
+  display: inline-flex;
+  align-items: center;
+  flex: 0 1 auto; 
+  height: 30px;
+}
+
+.input {
+  outline: 0;
+  border: 0;
+  border-radius: 0;
+  flex: 1; 
+  font-size: 16px;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.orange-chip {
+  background-color: orange;
+  color: white;
+  border-radius: 1.25rem; 
+  padding: 2px 5px; 
+  margin-right: 5px; 
+  cursor: pointer;
+}
+
+.violet-chip {
+  background-color: violet;
+  color: white;
+  border-radius: 1.25rem; 
+  padding: 2px 5px; 
+  margin-right: 5px; 
+  cursor: pointer;
+}
+
+.green-chip {
+  background-color: green;
+  color: white;
+  border-radius: 1.25rem; 
+  padding: 2px 5px; 
+  margin-right: 5px; 
+  cursor: pointer;
+}
+
+.blue-chip {
+  background-color: rgb(0, 102, 128);
+  color: white;
+  border-radius: 1.25rem; 
+  padding: 2px 5px; 
+  margin-right: 5px; 
+  cursor: pointer;
+}
+
+.centered-button {
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  padding: 6px; 
+}
+
+
+.checklist-container {
+  margin: 10px;
+}
+
+.checklist {
+  list-style-type: none; 
+  padding: 0; 
+}
+
+.task-item {
+  display: flex; 
+  align-items: center; 
+  margin-bottom: 10px; 
+  flex-wrap: wrap;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px; 
+  width: 20px; 
+  height: 20px;
+  cursor: pointer;
+}
+
+
+/* From Uiverse.io by Nawsome */ 
+.loader {
+  position: relative;
+  width: 75px;
+  height: 100px;
+}
+
+.loader__bar {
+  position: absolute;
+  bottom: 0;
+  width: 10px;
+  height: 50%;
+  background: rgb(0, 0, 0);
+  transform-origin: center bottom;
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.loader__bar:nth-child(1) {
+  left: 0px;
+  transform: scale(1, 0.2);
+  -webkit-animation: barUp1 4s infinite;
+  animation: barUp1 4s infinite;
+}
+
+.loader__bar:nth-child(2) {
+  left: 15px;
+  transform: scale(1, 0.4);
+  -webkit-animation: barUp2 4s infinite;
+  animation: barUp2 4s infinite;
+}
+
+.loader__bar:nth-child(3) {
+  left: 30px;
+  transform: scale(1, 0.6);
+  -webkit-animation: barUp3 4s infinite;
+  animation: barUp3 4s infinite;
+}
+
+.loader__bar:nth-child(4) {
+  left: 45px;
+  transform: scale(1, 0.8);
+  -webkit-animation: barUp4 4s infinite;
+  animation: barUp4 4s infinite;
+}
+
+.loader__bar:nth-child(5) {
+  left: 60px;
+  transform: scale(1, 1);
+  -webkit-animation: barUp5 4s infinite;
+  animation: barUp5 4s infinite;
+}
+
+.loader__ball {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  background: rgb(44, 143, 255);
+  border-radius: 50%;
+  -webkit-animation: ball624 4s infinite;
+  animation: ball624 4s infinite;
+}
+
+@keyframes ball624 {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  5% {
+    transform: translate(8px, -14px);
+  }
+
+  10% {
+    transform: translate(15px, -10px);
+  }
+
+  17% {
+    transform: translate(23px, -24px);
+  }
+
+  20% {
+    transform: translate(30px, -20px);
+  }
+
+  27% {
+    transform: translate(38px, -34px);
+  }
+
+  30% {
+    transform: translate(45px, -30px);
+  }
+
+  37% {
+    transform: translate(53px, -44px);
+  }
+
+  40% {
+    transform: translate(60px, -40px);
+  }
+
+  50% {
+    transform: translate(60px, 0);
+  }
+
+  57% {
+    transform: translate(53px, -14px);
+  }
+
+  60% {
+    transform: translate(45px, -10px);
+  }
+
+  67% {
+    transform: translate(37px, -24px);
+  }
+
+  70% {
+    transform: translate(30px, -20px);
+  }
+
+  77% {
+    transform: translate(22px, -34px);
+  }
+
+  80% {
+    transform: translate(15px, -30px);
+  }
+
+  87% {
+    transform: translate(7px, -44px);
+  }
+
+  90% {
+    transform: translate(0, -40px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@-webkit-keyframes barUp1 {
+  0% {
+    transform: scale(1, 0.2);
+  }
+
+  40% {
+    transform: scale(1, 0.2);
+  }
+
+  50% {
+    transform: scale(1, 1);
+  }
+
+  90% {
+    transform: scale(1, 1);
+  }
+
+  100% {
+    transform: scale(1, 0.2);
+  }
+}
+
+@keyframes barUp1 {
+  0% {
+    transform: scale(1, 0.2);
+  }
+
+  40% {
+    transform: scale(1, 0.2);
+  }
+
+  50% {
+    transform: scale(1, 1);
+  }
+
+  90% {
+    transform: scale(1, 1);
+  }
+
+  100% {
+    transform: scale(1, 0.2);
+  }
+}
+
+@-webkit-keyframes barUp2 {
+  0% {
+    transform: scale(1, 0.4);
+  }
+
+  40% {
+    transform: scale(1, 0.4);
+  }
+
+  50% {
+    transform: scale(1, 0.8);
+  }
+
+  90% {
+    transform: scale(1, 0.8);
+  }
+
+  100% {
+    transform: scale(1, 0.4);
+  }
+}
+
+@keyframes barUp2 {
+  0% {
+    transform: scale(1, 0.4);
+  }
+
+  40% {
+    transform: scale(1, 0.4);
+  }
+
+  50% {
+    transform: scale(1, 0.8);
+  }
+
+  90% {
+    transform: scale(1, 0.8);
+  }
+
+  100% {
+    transform: scale(1, 0.4);
+  }
+}
+
+@-webkit-keyframes barUp3 {
+  0% {
+    transform: scale(1, 0.6);
+  }
+
+  100% {
+    transform: scale(1, 0.6);
+  }
+}
+
+@keyframes barUp3 {
+  0% {
+    transform: scale(1, 0.6);
+  }
+
+  100% {
+    transform: scale(1, 0.6);
+  }
+}
+
+@-webkit-keyframes barUp4 {
+  0% {
+    transform: scale(1, 0.8);
+  }
+
+  40% {
+    transform: scale(1, 0.8);
+  }
+
+  50% {
+    transform: scale(1, 0.4);
+  }
+
+  90% {
+    transform: scale(1, 0.4);
+  }
+
+  100% {
+    transform: scale(1, 0.8);
+  }
+}
+
+@keyframes barUp4 {
+  0% {
+    transform: scale(1, 0.8);
+  }
+
+  40% {
+    transform: scale(1, 0.8);
+  }
+
+  50% {
+    transform: scale(1, 0.4);
+  }
+
+  90% {
+    transform: scale(1, 0.4);
+  }
+
+  100% {
+    transform: scale(1, 0.8);
+  }
+}
+
+@-webkit-keyframes barUp5 {
+  0% {
+    transform: scale(1, 1);
+  }
+
+  40% {
+    transform: scale(1, 1);
+  }
+
+  50% {
+    transform: scale(1, 0.2);
+  }
+
+  90% {
+    transform: scale(1, 0.2);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes barUp5 {
+  0% {
+    transform: scale(1, 1);
+  }
+
+  40% {
+    transform: scale(1, 1);
+  }
+
+  50% {
+    transform: scale(1, 0.2);
+  }
+
+  90% {
+    transform: scale(1, 0.2);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+}
