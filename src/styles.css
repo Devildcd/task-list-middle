@@ -1,11 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 /* @import 'assets/css/style.css'; */
 @import 'assets/css/sb-admin-2.css';
-/* @import 'assets/css/fontawesome-free/css/all.min.css'; */
-/* @import 'assets/css/globalStyles.css'; */
-
 
 /* html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+/* Estilos globales */
+.ng2-tag-input {
+    border-bottom: none !important;      /* Elimina la línea azul */
+  }
 
+.ng2-tag-input.ng2-tag-input--focused {
+    border-bottom: none !important; 
+    border: none;     /* Elimina la línea azul */
+  }
 

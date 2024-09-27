@@ -1,48 +1,62 @@
-
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+<div *ngIf="loading" class="loader">
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__ball"></div>
 </div>
 
-@if( !showInput ) {
-<div class="add-task-container" (click)="toggleInput(); $event.stopPropagation()" (keyup.enter)="toggleInput()"
-    tabindex="0">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-square add-icon">
-        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-        <line x1="12" y1="8" x2="12" y2="16"></line>
-        <line x1="8" y1="12" x2="16" y2="12"></line>
-    </svg>
-    <span class="add-task-text">Type to add new task</span>
-</div>
-} @else {
-<div class="card shadow mb-4" tabindex="0" style="width: 100%;">
-    <ul class="list-group list-group-flush">
-
-        <li class="list-group-item">
+<div >
+    @if( !showInput ){
+    <div class="add-task-container" (click)="toggleInput(); $event.stopPropagation()" (keyup.enter)="toggleInput()"
+        tabindex="0">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-plus-square add-icon">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="12" y1="8" x2="12" y2="16"></line>
+            <line x1="8" y1="12" x2="16" y2="12"></line>
+        </svg>
+        <span class="add-task-text">Type to add new task</span>
+    </div>
+    } @else {
+    <form [formGroup]="taskForm">
+        <div class="first-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-plus-square form-icon" style="margin-right: 16px; z-index: 1;">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="12" y1="8" x2="12" y2="16"></line>
+                <line x1="8" y1="12" x2="16" y2="12"></line>
+            </svg>
             <div class="input-container">
-                <div class="input-group input-group-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="feather feather-plus-square add-icon">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                        <line x1="12" y1="8" x2="12" y2="16"></line>
-                        <line x1="8" y1="12" x2="16" y2="12"></line>
-                    </svg>
-                    <input type="text" class="form-control my-input" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-lg" placeholder="Type to add new task">
-                </div>
-                <!-- Aquí añadimos el círculo -->
-                <div class="circle">
-                    <img src="assets/images/meme.jpg" alt="">
-                </div>
+                <ul class="chip-bar" (click)="onChipBarClick()" (keydown)="onKeyDown($event, inputField.value)"
+                    tabindex="0">
+                    <li class="chip" *ngFor="let item of items; let i = index; trackBy: trackByFn" [ngClass]="{
+                        'orange-chip': isEmail(item),
+                        'violet-chip': isTag(item),
+                        'green-chip': isContact(item),
+                        'blue-chip': isLink(item),
+                        'default-chip': isPlainText(item)
+                        }">
+                        {{ item }}
+                    </li>
+                    <li class="input-field">
+                        <input #inputField type="text" class="input" autocomplete="off" [placeholder]="placeholder"
+                            formControlName="input" (keydown)="onKeyDown($event, taskForm.get('input')!.value)">
+                    </li>
+                </ul>
             </div>
 
-        </li>
-        <li class="list-group-item">
-            <div class="button-container">
-                <button  class="btn btn-secundary button-icon">
+            <div class="circle" style="margin-left: 16px;">
+                <img src="assets/images/meme.jpg" alt="User Avatar" style="width: 40px; height: auto;">
+            </div>
+        </div>
+
+        <div class="second-container">
+            <div class="button-container" style=" height: 100%; padding: 0 10px;">
+                <button class="btn btn-secondary open-button button-icon" [disabled]="!taskForm.valid">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="feather feather-maximize-2">
@@ -54,7 +68,7 @@
                     <span>Open</span>
                 </button>
                 <div class="grouped-buttons">
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary" [disabled]="!taskForm.valid">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="feather feather-calendar">
@@ -65,7 +79,7 @@
                         </svg>
                         <span>Today</span>
                     </button>
-                    <button class="btn btn-primary" >
+                    <button class="btn btn-primary" [disabled]="!taskForm.valid">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="feather feather-unlock">
@@ -74,7 +88,7 @@
                         </svg>
                         <span>Public</span>
                     </button>
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary" [disabled]="!taskForm.valid">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="feather feather-sun">
@@ -90,51 +104,95 @@
                         </svg>
                         <span>Normal</span>
                     </button>
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary" [disabled]="!taskForm.valid">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" />
                             <text x="12.5" y="16" font-size="12" text-anchor="middle" fill="currentColor">0</text>
                         </svg>
                         <span>Estimation</span>
                     </button>
-                </div>
 
-                <div class="right-grouped-buttons">
-                    <button class="btn btn-danger" (click)="cancel()"><span>Cancel</span></button>
-                    <button class="btn btn-success"><span>Ok</span></button>
+                    <button class="btn btn-primary" [disabled]="!taskForm.valid">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-more-vertical" style="margin-left: 5px;">
+                            <circle cx="12" cy="6" r="1"></circle>
+                            <circle cx="12" cy="12" r="1"></circle>
+                            <circle cx="12" cy="18" r="1"></circle>
+                        </svg>
+                    </button>
+                </div>
+                <div class="right-grouped-buttons" style="display: flex; margin-left: auto;">
+                    <button class="btn btn-primary cancel-button" (click)="cancel()"
+                        *ngIf="!isSmallScreen"><span>Cancel</span></button>
+
+                    @if( isSmallScreen && !taskForm.valid ) {
+                    <button class="btn btn-primary confirm-button centered-button" (click)="cancel()"><span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-x" viewBox="0 0 16 16">
+                                <path
+                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 1 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 1 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                <text x="12.5" y="16" font-size="12" text-anchor="middle" fill="currentColor"></text>
+                            </svg>
+                        </span></button>
+                    }
+
+                    @if( isSmallScreen && taskForm.valid ) {
+                    <button class="btn btn-primary confirm-button centered-button" (click)="onSubmit()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            class="bi bi-plus" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M8 3a.5.5 0 0 1 .5.5V7h3.5a.5.5 0 0 1 0 1H8.5v3.5a.5.5 0 0 1-1 0V8H4a.5.5 0 0 1 0-1h3.5V3.5A.5.5 0 0 1 8 3z" />
+                        </svg>
+                    </button>
+                    }
+
+                    @if( !isSmallScreen ) {
+                    <button class="btn btn-primary confirm-button" (click)="onSubmit()"><span>{{ buttonText
+                            }}</span></button>
+                    }
                 </div>
             </div>
-        </li>
-    </ul>
-</div>
-}
+        </div>
+    </form>
+    }
 
+    <div class="checklist-container">
+        <ul class="checklist">
+            <li *ngFor="let task of tasks">
+                <div class="task-item">
+                    <input type="checkbox" />
+                    <span *ngFor="let email of task.email" 
+                    [ngClass]="getItemClass(email, 'email')"
+                    (click)="openLink(email)"
+                    (keydown.enter)="openLink(email)" tabindex="0">
+                        {{ email }}
+                    </span>
 
-<div class="checklist-container">
-    <ul class="checklist">
-        <li>
-            <label>
-                <input type="checkbox" class="custom-checkbox" />
-                Elemento 1
-            </label>
-        </li>
-        <li>
-            <label>
-                <input type="checkbox" class="custom-checkbox" />
-                Elemento 2
-            </label>
-        </li>
-        <li>
-            <label>
-                <input type="checkbox" class="custom-checkbox" />
-                Elemento 3
-            </label>
-        </li>
-        <li>
-            <label>
-                <input type="checkbox" class="custom-checkbox" />
-                Elemento 4
-            </label>
-        </li>
-    </ul>
+                    <span *ngFor="let tag of task.tags" [ngClass]="getItemClass(tag, 'tag')"
+                    (click)="openLink(tag)"
+                    (keydown.enter)="openLink(tag)" tabindex="0">
+                        {{ tag }}
+                    </span>
+
+                    <span *ngFor="let link of task.links" [ngClass]="getItemClass(link, 'link')"
+                    (click)="openLink(link)"
+                    (keydown.enter)="openLink(link)" tabindex="0">
+                        {{ link }}
+                    </span>
+
+                    <span *ngFor="let contact of task.contacts" [ngClass]="getItemClass(contact, 'contact')"
+                    (click)="openLink(contact)"
+                    (keydown.enter)="openLink(contact)" tabindex="0">
+                        {{ contact }}
+                    </span>
+
+                    <span *ngFor="let text of task.text" [ngClass]="getItemClass(text, 'text')">
+                        {{ text }}
+                    </span>
+
+                </div>
+            </li>
+        </ul>
+    </div>
 </div>
