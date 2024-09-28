@@ -332,8 +332,8 @@
 }
 
 .orange-chip {
-  background-color: orange;
-  color: white;
+  background-color: #ffe6c7;
+  color: #f58e0a;
   border-radius: 1.25rem; 
   padding: 2px 5px; 
   margin-right: 5px; 
@@ -341,8 +341,8 @@
 }
 
 .violet-chip {
-  background-color: violet;
-  color: white;
+  background-color: #e5d6ff;
+  color: #702ee6;
   border-radius: 1.25rem; 
   padding: 2px 5px; 
   margin-right: 5px; 
@@ -350,8 +350,8 @@
 }
 
 .green-chip {
-  background-color: green;
-  color: white;
+  background-color: #adf0d9;
+  color: #07a873;
   border-radius: 1.25rem; 
   padding: 2px 5px; 
   margin-right: 5px; 
@@ -359,8 +359,8 @@
 }
 
 .blue-chip {
-  background-color: rgb(0, 102, 128);
-  color: white;
+  background-color: #d6ebff;
+  color: #007fff;
   border-radius: 1.25rem; 
   padding: 2px 5px; 
   margin-right: 5px; 

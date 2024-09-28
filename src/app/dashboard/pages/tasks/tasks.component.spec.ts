@@ -18,27 +18,28 @@ describe('TasksComponent', () => {
       'getTasks',
       'createTask',
     ]);
-    
+
     // Simulando que getTasks devuelve un observable con tareas ficticias
     taskServiceSpy.getTasks.and.returnValue(
       of([
-      {
-        id: '1',
-        text: ['Test Task 1'],
-        email: [],
-        tags: [],
-        links: [],
-        contacts: [],
-      },
-      {
-        id: '2',
-        text: ['Test Task 2'],
-        email: [],
-        tags: [],
-        links: [],
-        contacts: [],
-      },
-    ]));
+        {
+          id: '1',
+          text: ['Test Task 1'],
+          email: [],
+          tags: [],
+          links: [],
+          contacts: [],
+        },
+        {
+          id: '2',
+          text: ['Test Task 2'],
+          email: [],
+          tags: [],
+          links: [],
+          contacts: [],
+        },
+      ]),
+    );
 
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, TasksComponent],
@@ -48,7 +49,7 @@ describe('TasksComponent', () => {
         { provide: Firestore, useClass: FirestoreMock },
       ],
     }).compileComponents();
-    
+
     fixture = TestBed.createComponent(TasksComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -66,8 +67,8 @@ describe('TasksComponent', () => {
     expect(component).toBeTruthy(); // Verifica que el componente se haya creado correctamente
     expect(component.isSmallScreen).toBe(window.innerWidth < 1230); // Verifica la condición de isSmallScreen
 
-    expect(component.taskForm).toBeDefined(); 
-    expect(component.taskForm.get('input')).toBeDefined(); 
+    expect(component.taskForm).toBeDefined();
+    expect(component.taskForm.get('input')).toBeDefined();
     expect(component.taskForm.get('input')?.valid).toBeFalse(); // El campo input debería ser inválido al principio
 
     const loadTasksSpy = spyOn(component, 'loadTasks').and.callThrough(); // Espía la función loadTasks
@@ -76,8 +77,8 @@ describe('TasksComponent', () => {
   });
 
   it('should load tasks on init', () => {
-    component.ngOnInit(); 
-    expect(taskService.getTasks).toHaveBeenCalled(); 
+    component.ngOnInit();
+    expect(taskService.getTasks).toHaveBeenCalled();
     expect(component.tasks.length).toBe(2); // Verifica que las tareas se carguen correctamente
   });
 
@@ -116,7 +117,7 @@ describe('TasksComponent', () => {
     const result = component.getItemClass('test@example.com', 'email');
     expect(result).toBe('orange-chip');
   });
-  
+
   it('should return correct class for tag type', () => {
     const result = component.getItemClass('tag1', 'tag');
     expect(result).toBe('violet-chip');
@@ -191,11 +192,10 @@ describe('TasksComponent', () => {
       component.onSubmit();
 
       expect(consoleLogSpy).toHaveBeenCalledWith(
-        'No se puede crear la tarea. El array de items está vacío.'
+        'No se puede crear la tarea. El array de items está vacío.',
       );
     });
   });
-
 
   describe('isLink', () => {
     it('should return true for a valid HTTP link', () => {
@@ -305,7 +305,10 @@ describe('TasksComponent', () => {
     it('should call window.open with the link for a valid link', () => {
       const windowOpenSpy = spyOn(window, 'open');
       component.openLink('http://example.com');
-      expect(windowOpenSpy).toHaveBeenCalledWith('http://example.com', '_blank');
+      expect(windowOpenSpy).toHaveBeenCalledWith(
+        'http://example.com',
+        '_blank',
+      );
     });
 
     it('should log "Etiqueta no válida" for an invalid item', () => {
@@ -323,35 +326,35 @@ describe('TasksComponent', () => {
         bubbles: true,
         cancelable: true,
       });
-  
+
       const target = document.createElement('div');
       target.classList.add('not-in-container');
-  
+
       Object.defineProperty(mockEvent, 'target', { value: target });
-  
+
       component.onClick(mockEvent);
-  
+
       expect(component.showInput).toBeFalse();
     });
-  
+
     it('should not change showInput if clicking inside specified containers', () => {
       component.showInput = true;
-  
+
       // Crear un evento de clic simulado
       const mockEvent = new MouseEvent('click', {
         bubbles: true,
         cancelable: true,
       });
-  
+
       // Crear un elemento que simule el objetivo del evento
       const target = document.createElement('div');
       target.classList.add('first-container'); // Simulando un clic dentro de la contenedor
-  
+
       // Llamar a onClick con el evento y el objetivo simulado
       Object.defineProperty(mockEvent, 'target', { value: target });
-  
+
       component.onClick(mockEvent); // Llama a onClick con el evento
-  
+
       expect(component.showInput).toBeTrue(); // showInput debería seguir siendo verdadero
     });
   });
@@ -376,29 +379,29 @@ describe('TasksComponent', () => {
 
   describe('toggleInput', () => {
     it('should toggle showInput from false to true', () => {
-      component.showInput = false; 
+      component.showInput = false;
 
-      component.toggleInput(); 
+      component.toggleInput();
 
-      expect(component.showInput).toBeTrue(); 
+      expect(component.showInput).toBeTrue();
     });
 
     it('should toggle showInput from true to false', () => {
-      component.showInput = true; 
+      component.showInput = true;
 
-      component.toggleInput(); 
+      component.toggleInput();
 
-      expect(component.showInput).toBeFalse(); 
+      expect(component.showInput).toBeFalse();
     });
   });
 
   describe('cancel', () => {
     it('should set showInput to false', () => {
-      component.showInput = true; 
+      component.showInput = true;
 
-      component.cancel(); 
+      component.cancel();
 
-      expect(component.showInput).toBeFalse(); 
+      expect(component.showInput).toBeFalse();
     });
   });
 });

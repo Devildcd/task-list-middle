@@ -32,6 +32,7 @@ export default class TasksComponent implements OnInit {
   items: string[] = [];
   placeholder: string = 'Type to add new task';
   isDisabled: boolean = true;
+  errorMessage: string = '';
   loading = true;
 
   @ViewChild('inputField', { static: false })
@@ -58,7 +59,6 @@ export default class TasksComponent implements OnInit {
     this.inputField.nativeElement.focus();
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onKeyDown(event: KeyboardEvent, value: string): void {
     switch (event.key) {
       case 'Enter':
@@ -86,8 +86,8 @@ export default class TasksComponent implements OnInit {
   onChipBarKeyup(event: KeyboardEvent) {
     // Verifica si se presionó Enter o la barra espaciadora
     if (event.key === 'Enter' || event.key === ' ') {
-      this.onChipBarClick(); // Llama al mismo método que manejas con clic
-      event.preventDefault(); // Evita el desplazamiento de la página si es necesario
+      this.onChipBarClick();
+      event.preventDefault();
     }
   }
 
@@ -129,8 +129,6 @@ export default class TasksComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.taskForm.get('input')?.value);
-    console.log(this.taskForm.valid);
     if (this.taskForm.valid) {
       const task: Task = {
         email: [],
@@ -173,11 +171,13 @@ export default class TasksComponent implements OnInit {
           },
         });
       } else {
-        console.log(
-          'No se puede crear la tarea. El array de items está vacío.',
-        );
-        this.showInput = false;
+        this.errorMessage = 'type and press enter to create the tag';
+        setTimeout(() => {
+          this.errorMessage = '';
+        }, 2000);
       }
+    } else {
+      this.showInput = false;
     }
   }
 
