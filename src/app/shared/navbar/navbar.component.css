@@ -1,0 +1,23 @@
+.alert {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    padding: 1rem; 
+    position: relative; 
+    margin-top: 10px;
+}
+
+.close {
+    background: none; 
+    color: #0f6848;
+    border: none; 
+    font-size: 1.5rem; 
+    line-height: 1; 
+    margin-left: 1rem; 
+    cursor: pointer; 
+    margin-top: -5px;
+}
+
+.close:focus {
+    outline: none; 
+}
