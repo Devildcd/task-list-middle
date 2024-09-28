@@ -130,33 +130,22 @@ export default class TasksComponent implements OnInit {
 
   onSubmit() {
     if (this.taskForm.valid) {
-      const task: Task = {
-        email: [],
-        contacts: [],
-        text: [],
-        tags: [],
-        links: [],
-      };
+      const task: Task = { items: [] };
+
       this.items.forEach((item: string) => {
         if (this.isEmail(item)) {
-          task.email!.push(item);
+          task.items.push({ type: 'email', value: item });
         } else if (this.isTag(item)) {
-          task.tags!.push(item);
+          task.items.push({ type: 'tag', value: item });
         } else if (this.isLink(item)) {
-          task.links!.push(item);
+          task.items.push({ type: 'link', value: item });
         } else if (this.isContact(item)) {
-          task.contacts!.push(item);
+          task.items.push({ type: 'contact', value: item });
         } else {
-          task.text!.push(item);
+          task.items.push({ type: 'text', value: item });
         }
       });
-      if (
-        task.email!.length > 0 ||
-        task.contacts!.length > 0 ||
-        task.text!.length > 0 ||
-        task.tags!.length > 0 ||
-        task.links!.length > 0
-      ) {
+      if (task.items.length > 0) {
         this.taskService.createTask(task).subscribe({
           next: () => {
             console.log('Task created successfully');
