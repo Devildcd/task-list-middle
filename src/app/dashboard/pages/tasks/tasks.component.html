@@ -157,6 +157,10 @@
     </form>
     }
 
+    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+        {{ errorMessage }}
+      </div>
+
     <div class="checklist-container">
         <ul class="checklist">
             <li *ngFor="let task of tasks">
