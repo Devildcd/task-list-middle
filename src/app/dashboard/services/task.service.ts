@@ -5,14 +5,16 @@ import {
   collectionData,
   // doc,
   DocumentData,
+  DocumentReference,
   Firestore,
   FirestoreDataConverter,
+  getDoc,
   QueryDocumentSnapshot,
   // setDoc,
   SnapshotOptions,
 } from '@angular/fire/firestore';
-import { Task } from '../interfaces/task.interface';
-import { from, Observable } from 'rxjs';
+import { Task, TaskItem } from '../interfaces/task.interface';
+import { from, map, Observable, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +22,12 @@ import { from, Observable } from 'rxjs';
 export class TaskService {
   private taskConverter: FirestoreDataConverter<Task> = {
     toFirestore(task: Task): DocumentData {
-      return { ...task };
+      return {
+        items: task.items.map((item) => ({
+          type: item.type,
+          value: item.value,
+        })),
+      };
     },
     fromFirestore(
       snapshot: QueryDocumentSnapshot<DocumentData>,
@@ -29,11 +36,12 @@ export class TaskService {
       const data = snapshot.data(options)!;
       return {
         id: snapshot.id,
-        email: data['email'] || [],
-        contacts: data['contacts'] || [],
-        text: data['text'] || [],
-        tags: data['tags'] || [],
-        links: data['links'] || [],
+        items: data['items']
+          ? data['items'].map((item: TaskItem) => ({
+              type: item.type,
+              value: item.value,
+            }))
+          : [],
       };
     },
   };
@@ -48,7 +56,16 @@ export class TaskService {
   }
 
   createTask(task: Task): Observable<Task> {
-    return from(addDoc(this.taskCollection, task));
+    return from(addDoc(this.taskCollection, task)).pipe(
+      switchMap((docRef: DocumentReference<Task>) =>
+        from(getDoc(docRef)).pipe(
+          map((docSnap) => {
+            const data = docSnap.data();
+            return { id: docSnap.id, ...data } as Task;
+          }),
+        ),
+      ),
+    );
   }
 
   getTasks(): Observable<Task[]> {

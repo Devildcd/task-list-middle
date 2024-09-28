@@ -7,7 +7,7 @@
     <div class="loader__ball"></div>
 </div>
 
-<div >
+<div *ngIf="!loading">
     @if( !showInput ){
     <div class="add-task-container" (click)="toggleInput(); $event.stopPropagation()" (keyup.enter)="toggleInput()"
         tabindex="0">
@@ -166,35 +166,12 @@
             <li *ngFor="let task of tasks">
                 <div class="task-item">
                     <input type="checkbox" />
-                    <span *ngFor="let email of task.email" 
-                    [ngClass]="getItemClass(email, 'email')"
-                    (click)="openLink(email)"
-                    (keydown.enter)="openLink(email)" tabindex="0">
-                        {{ email }}
-                    </span>
-
-                    <span *ngFor="let tag of task.tags" [ngClass]="getItemClass(tag, 'tag')"
-                    (click)="openLink(tag)"
-                    (keydown.enter)="openLink(tag)" tabindex="0">
-                        {{ tag }}
-                    </span>
-
-                    <span *ngFor="let link of task.links" [ngClass]="getItemClass(link, 'link')"
-                    (click)="openLink(link)"
-                    (keydown.enter)="openLink(link)" tabindex="0">
-                        {{ link }}
-                    </span>
-
-                    <span *ngFor="let contact of task.contacts" [ngClass]="getItemClass(contact, 'contact')"
-                    (click)="openLink(contact)"
-                    (keydown.enter)="openLink(contact)" tabindex="0">
-                        {{ contact }}
-                    </span>
-
-                    <span *ngFor="let text of task.text" [ngClass]="getItemClass(text, 'text')">
-                        {{ text }}
-                    </span>
-
+                    <span *ngFor="let item of task.items" 
+                    [ngClass]="getItemClass(item.value, item.type)"
+                    (click)="openLink(item.value)"
+                    (keydown.enter)="openLink(item.value)" tabindex="0">
+                {{ item.value }}
+              </span>
                 </div>
             </li>
         </ul>
