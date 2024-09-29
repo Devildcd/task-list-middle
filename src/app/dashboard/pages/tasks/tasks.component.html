@@ -165,7 +165,7 @@
         <ul class="checklist">
             <li *ngFor="let task of tasks">
                 <div class="task-item">
-                    <input type="checkbox" />
+                    <input type="checkbox" (change)="onTaskCheckedCheckbox( task.id!, $event )" />
                     <span *ngFor="let item of task.items" 
                     [ngClass]="getItemClass(item.value, item.type)"
                     (click)="openLink(item.value)"

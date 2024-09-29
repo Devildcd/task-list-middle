@@ -16,6 +16,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { Task } from '../../interfaces/task.interface';
 import { TaskService } from '../../services/task.service';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-tasks',
@@ -42,6 +43,7 @@ export default class TasksComponent implements OnInit {
     private fb: FormBuilder,
     public taskService: TaskService,
     private cd: ChangeDetectorRef,
+    private sharedService: SharedService,
   ) {}
 
   ngOnInit() {
@@ -148,15 +150,10 @@ export default class TasksComponent implements OnInit {
       if (task.items.length > 0) {
         this.taskService.createTask(task).subscribe({
           next: () => {
-            console.log('Task created successfully');
             this.loadTasks();
             this.taskForm.reset();
             this.showInput = false;
             this.items = [];
-            console.log(task);
-          },
-          error: (error) => {
-            console.error('Error creating task', error);
           },
         });
       } else {
@@ -233,6 +230,22 @@ export default class TasksComponent implements OnInit {
     } else {
       console.log('Etiqueta no válida');
     }
+  }
+
+  onTaskCheckedCheckbox(taskId: string | undefined, event: Event) {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    if (isChecked) {
+      this.deleteTask(taskId);
+    }
+  }
+
+  deleteTask(taskId: string | undefined) {
+    this.taskService.deleteTask(taskId).subscribe({
+      next: () => {
+        this.loadTasks();
+        this.sharedService.sendMessage('Excellent, you have completed a task!');
+      },
+    });
   }
 
   // Funcionalidades con click

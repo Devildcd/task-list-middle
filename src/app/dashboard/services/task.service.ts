@@ -3,6 +3,8 @@ import {
   addDoc,
   collection,
   collectionData,
+  deleteDoc,
+  doc,
   // doc,
   DocumentData,
   DocumentReference,
@@ -74,8 +76,8 @@ export class TaskService {
     >;
   }
 
-  // updateTask(task: Task): Observable<void> {
-  //   const taskDocRef = doc(this.taskCollection, task.id);
-  //   return from(setDoc(taskDocRef, task));
-  // }
+  deleteTask(taskId: string | undefined): Observable<void> {
+    const taskDocRef = doc(this.taskCollection, taskId);
+    return from(deleteDoc(taskDocRef));
+  }
 }
